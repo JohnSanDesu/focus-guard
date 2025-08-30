@@ -1,0 +1,77 @@
+<!doctype html>
+<html lang="ja">
+  <head>
+    <meta charset="UTF-8" />
+    <title>FocusGuard</title>
+    <!-- NOTE: In production, TS should be compiled to JS; keeping as-is per your context -->
+    <meta http-equiv="Content-Security-Policy" content="script-src 'self'; object-src 'none'; base-uri 'self';">
+    <link rel="stylesheet" href="./start.css">
+  </head>
+  <body>
+    <main class="wrap">
+      <h1>FocusGuard</h1>
+      <div id="fg-status" class="status">待機中（セッション未開始）</div>
+
+      <!-- Session length -->
+      <section class="field">
+        <label for="fg-minutes">Session minutes</label>
+        <input id="fg-minutes" type="number" min="1" step="1" placeholder="30" />
+      </section>
+
+      <!-- Consent -->
+      <section class="field row">
+        <input id="fg-consent" type="checkbox" />
+        <label for="fg-consent">Allow on-demand screenshot (for VQA stage later)</label>
+      </section>
+
+      <!-- Goal -->
+      <section class="field">
+        <label for="fg-goal">Goal（必須／300文字まで）</label>
+        <textarea id="fg-goal" rows="3" placeholder="例：線形代数の復習。YouTubeや短尺SNSは見ない。"></textarea>
+      </section>
+
+      <!-- ===== 3 columns: Allow / Neutral / Block ===== -->
+      <section class="groups">
+        <!-- Allow column -->
+        <div class="group">
+          <div class="group-title">Allow</div>
+          <select id="fg-allow" multiple size="10" aria-label="Allow categories"></select>
+          <div class="group-actions">
+            <!-- Buttons related to Allow go under Allow column -->
+            <button id="fg-to-allow" type="button">Add → Allow</button>
+            <button id="fg-rm-allow" type="button" class="ghost">Remove from Allow</button>
+          </div>
+        </div>
+
+        <!-- Neutral column (no action buttons here by design) -->
+        <div class="group">
+          <div class="group-title">Neutral (unused)</div>
+          <select id="fg-neutral" multiple size="10" aria-label="Neutral categories"></select>
+          <!-- Keep actions empty to preserve grid structure -->
+          <div class="group-actions"></div>
+        </div>
+
+        <!-- Block column -->
+        <div class="group">
+          <div class="group-title">Block</div>
+          <select id="fg-block" multiple size="10" aria-label="Block categories"></select>
+          <div class="group-actions">
+            <!-- Buttons related to Block go under Block column -->
+            <button id="fg-to-block" type="button">Add → Block</button>
+            <button id="fg-rm-block" type="button" class="ghost">Remove from Block</button>
+          </div>
+        </div>
+      </section>
+
+      <!-- Footer buttons -->
+      <section class="buttons">
+        <button id="fg-save" class="primary">Save / Start</button>
+        <button id="fg-clear" class="ghost" type="button">Clear</button>
+        <button id="fg-stop" class="danger" type="button" hidden>Stop Session</button>
+      </section>
+    </main>
+
+    <!-- NOTE: If this is a Chrome Extension popup, start.ts should be transpiled/bundled to JS. -->
+    <script type="module" src="./start.ts"></script>
+  </body>
+</html>

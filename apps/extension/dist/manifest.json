@@ -1,0 +1,47 @@
+{
+  "manifest_version": 3,
+  "name": "FocusGuard",
+  "version": "0.1.0",
+  "description": "Stay aligned with your focus goals. Judge pages as ALLOW/BLOCK/REVIEW.",
+  "action": {
+    "default_title": "FocusGuard",
+    "default_popup": "src/ui/start.html"
+  },
+  "permissions": [
+    "activeTab",
+    "tabs",
+    "scripting",
+    "storage",
+    "alarms"
+  ],
+  "host_permissions": [
+    "<all_urls>"
+  ],
+  "background": {
+    "service_worker": "service-worker-loader.js",
+    "type": "module"
+  },
+  "content_scripts": [
+    {
+      "js": [
+        "assets/content.ts-nNoUskA5.js"
+      ],
+      "matches": [
+        "<all_urls>"
+      ],
+      "run_at": "document_idle"
+    }
+  ],
+  "web_accessible_resources": [
+    {
+      "matches": [
+        "<all_urls>"
+      ],
+      "resources": [
+        "assets/content.ts-nNoUskA5.js",
+        "assets/content.ts-nNoUskA5.js.map"
+      ],
+      "use_dynamic_url": false
+    }
+  ]
+}
